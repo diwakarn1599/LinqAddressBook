@@ -145,7 +145,25 @@ namespace LinqAddressBook
                 //display after its modified
                 Console.WriteLine("After Modification");
                 DisplayDataTable();
-                output = "success";
+                output = "successfully modified";
+                return output;
+            }
+            return output;
+        }
+
+        public string DeleteDataTableRecordUsingName(string name, AddressBookData Person)
+        {
+            string output = string.Empty;
+            //insert into table
+            InsertIntoDataTable(Person);
+            var res = (from person in dataTable.AsEnumerable() where person.Field<string>("FirstName").Equals(name) select person).FirstOrDefault();//returns first element satisfies the condition or default value
+            if (res != null)
+            {
+                res.Delete();
+                //display after its deleted
+                Console.WriteLine("After Deletion");
+                DisplayDataTable();
+                output = "successfully deleted";
                 return output;
             }
             return output;

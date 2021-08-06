@@ -54,5 +54,25 @@ namespace LinqAddressBookTest
             }
             
         }
+
+        /// <summary>
+        /// test method to delete based on name
+        /// </summary>
+        [TestMethod]
+
+        public void TestForDeleteData()
+        {
+            try
+            {
+                string actual, expected = "successfully deleted";
+                actual = manager.DeleteDataTableRecordUsingName("Diwakar", person);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
     }
 }
