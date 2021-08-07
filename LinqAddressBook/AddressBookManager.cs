@@ -145,6 +145,19 @@ namespace LinqAddressBook
                 Person.personTypeId = 2;
                 Person.personType = "Friend";
                 AddRowintoDataTable(Person);
+                //Adding same person to both types
+                //Assigning fourth value
+                Person.firstName = "Dhoni";
+                Person.lastName = "MS";
+                Person.address = "Ranchi";
+                Person.city = "ranchi";
+                Person.state = "chattisgarh";
+                Person.zipCode = 158456;
+                Person.phoneNumber = 8538527890;
+                Person.emailId = "msd@sdf.com";
+                Person.personTypeId = 1;
+                Person.personType = "Family";
+                AddRowintoDataTable(Person);
                 //display the table
                 DisplayDataTable();
             }
