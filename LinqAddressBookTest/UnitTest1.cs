@@ -148,5 +148,21 @@ namespace LinqAddressBookTest
             }
 
         }
+
+        [TestMethod]
+        public void TestForCountBasedOnTpe()
+        {
+            try
+            {
+                string actual, expected = "success";
+                actual = manager.GetCountByType(person);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
     }
 }

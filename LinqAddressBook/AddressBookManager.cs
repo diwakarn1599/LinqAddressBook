@@ -78,6 +78,18 @@ namespace LinqAddressBook
                 dataColumn.ColumnName = "ZipCode";
                 dataColumn.AutoIncrement = false;
                 dataTable.Columns.Add(dataColumn);
+                //column for person id
+                dataColumn = new DataColumn();
+                dataColumn.DataType = typeof(Int64);
+                dataColumn.ColumnName = "PersonTypeId";
+                dataColumn.AutoIncrement = false;
+                dataTable.Columns.Add(dataColumn);
+                //column for person type
+                dataColumn = new DataColumn();
+                dataColumn.DataType = typeof(string);
+                dataColumn.ColumnName = "PersonType";
+                dataColumn.AutoIncrement = false;
+                dataTable.Columns.Add(dataColumn);
             }
             catch(Exception ex)
             {
@@ -105,6 +117,8 @@ namespace LinqAddressBook
                 Person.zipCode = 123456;
                 Person.phoneNumber = 1234567890;
                 Person.emailId = "asfd@sdf.com";
+                Person.personTypeId = 1;
+                Person.personType = "Family";
                 //Add into table
                 AddRowintoDataTable(Person);
                 //Assigning second value
@@ -116,6 +130,8 @@ namespace LinqAddressBook
                 Person.zipCode = 158456;
                 Person.phoneNumber = 1238527890;
                 Person.emailId = "qrre@sdf.com";
+                Person.personTypeId = 2;
+                Person.personType = "Friend";
                 AddRowintoDataTable(Person);
                 //Assigning third value
                 Person.firstName = "Dhoni";
@@ -126,6 +142,8 @@ namespace LinqAddressBook
                 Person.zipCode = 158456;
                 Person.phoneNumber = 8538527890;
                 Person.emailId = "msd@sdf.com";
+                Person.personTypeId = 2;
+                Person.personType = "Friend";
                 AddRowintoDataTable(Person);
                 //display the table
                 DisplayDataTable();
@@ -156,6 +174,9 @@ namespace LinqAddressBook
                 dataRow["ZipCode"] = Person.zipCode;
                 dataRow["PhoneNumber"] = Person.phoneNumber;
                 dataRow["Email"] = Person.emailId;
+                dataRow["PersonTypeId"] = Person.personTypeId;
+                dataRow["PersonType"] = Person.personType;
+
                 //add row into table
                 dataTable.Rows.Add(dataRow);
             }
@@ -329,6 +350,41 @@ namespace LinqAddressBook
 
                         Console.WriteLine($"{row["FirstName"]} | { row["LastName"]} | {row["Address"]} | {row["City"]} | {row["State"]} | {row["ZipCode"]} | {row["PhoneNumber"]} | {row["Email"]}\n");
                     }
+                    
+                }
+                output = "success";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                output = "unsuccessfull";
+            }
+            return output;
+
+        }
+        /// <summary>
+        /// Method to get count by type
+        /// </summary>
+        /// <param name="Person"></param>
+        /// <returns></returns>
+        public string GetCountByType(AddressBookData Person)
+        {
+            
+            string output = string.Empty;
+            try
+            {
+                //insert into table
+                InsertIntoDataTable(Person);
+                var res = (from person in dataTable.AsEnumerable().GroupBy(row => new { personType = row["PersonType"] }) select person);
+                foreach (var value in res)
+                {
+                    
+                    Console.WriteLine(value.Key);
+                    foreach (var row in value)
+                    {
+                        Console.WriteLine($"{row["FirstName"]} | { row["LastName"]} | {row["Address"]} | {row["City"]} | {row["State"]} | {row["ZipCode"]} | {row["PhoneNumber"]} | {row["Email"]} | {row["PersonTypeId"]}| {row["PersonType"]}\n");
+                    }
+                    Console.WriteLine("----------------------");
                     
                 }
                 output = "success";
