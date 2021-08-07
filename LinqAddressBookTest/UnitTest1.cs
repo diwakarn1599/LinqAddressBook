@@ -130,5 +130,23 @@ namespace LinqAddressBookTest
             }
 
         }
+        /// <summary>
+        /// test method Sort records based on name in given city
+        /// </summary>
+        [TestMethod]
+        public void TestForSortBasedOnNameinGivenCity()
+        {
+            try
+            {
+                string actual, expected = "success";
+                actual = manager.SortBasedOnNameinGivenCity("chennai", person);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
     }
 }

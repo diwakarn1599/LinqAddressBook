@@ -307,6 +307,40 @@ namespace LinqAddressBook
             return c;
 
         }
+        /// <summary>
+        /// Sort records based on name in given city
+        /// </summary>
+        /// <param name="cityName"></param>
+        /// <param name="Person"></param>
+        /// <returns></returns>
+        public string SortBasedOnNameinGivenCity(string cityName, AddressBookData Person)
+        {
+            string output = string.Empty;
+            try
+            {
+                //insert into table
+                InsertIntoDataTable(Person);
+                var res = (from person in dataTable.AsEnumerable() orderby person.Field<string>("FirstName") where person.Field<string>("City").Equals(cityName) select person);
+                if (res != null)
+                {
+                    Console.WriteLine("After retreiving");
+                    foreach (DataRow row in res)
+                    {
+
+                        Console.WriteLine($"{row["FirstName"]} | { row["LastName"]} | {row["Address"]} | {row["City"]} | {row["State"]} | {row["ZipCode"]} | {row["PhoneNumber"]} | {row["Email"]}\n");
+                    }
+                    
+                }
+                output = "success";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                output = "unsuccessfull";
+            }
+            return output;
+
+        }
 
         /// <summary>
         /// Method to display the data table
