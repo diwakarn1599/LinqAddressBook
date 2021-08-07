@@ -94,5 +94,41 @@ namespace LinqAddressBookTest
             }
 
         }
+        /// <summary>
+        /// test to count records based on  state name
+        /// </summary>
+        [TestMethod]
+        public void TestForCountBasedOnState()
+        {
+            try
+            {
+                int actual, expected = 2;
+                actual = manager.CountBasedOnState("Tn", person);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+        /// <summary>
+        /// test to count records based on city 
+        /// </summary>
+        [TestMethod]
+        public void TestForCountBasedOnCity()
+        {
+            try
+            {
+                int actual, expected = 2;
+                actual = manager.CountBasedOnCity("chennai", person);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
     }
 }

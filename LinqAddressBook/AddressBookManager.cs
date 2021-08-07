@@ -230,7 +230,8 @@ namespace LinqAddressBook
         /// <summary>
         /// Retreive records based on state or city 
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="stateName"></param>
+        /// <param name="cityName"></param>
         /// <param name="Person"></param>
         /// <returns></returns>
         public int RetreiveBasedOnStateOrCity(string stateName,string cityName, AddressBookData Person)
@@ -258,6 +259,53 @@ namespace LinqAddressBook
             }
             return c;
             
+        }
+        /// <summary>
+        /// Method to count to based on  state
+        /// </summary>
+        /// <param name="stateName"></param>
+        /// <param name="cityName"></param>
+        /// <param name="Person"></param>
+        /// <returns></returns>
+        public int CountBasedOnState(string stateName, AddressBookData Person)
+        {
+            int c = 0;
+            try
+            {
+                //insert into table
+                InsertIntoDataTable(Person);
+                var res = (from person in dataTable.AsEnumerable() where person.Field<string>("State").Equals(stateName) select person).ToList().Count;
+                c = res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return c;
+
+        }
+        /// <summary>
+        /// method to count based on city
+        /// </summary>
+        /// <param name="cityName"></param>
+        /// <param name="Person"></param>
+        /// <returns></returns>
+        public int CountBasedOnCity(string cityName, AddressBookData Person)
+        {
+            int c = 0;
+            try
+            {
+                //insert into table
+                InsertIntoDataTable(Person);
+                var res = (from person in dataTable.AsEnumerable() where person.Field<string>("City").Equals(cityName) select person).ToList().Count;
+                c = res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return c;
+
         }
 
         /// <summary>
