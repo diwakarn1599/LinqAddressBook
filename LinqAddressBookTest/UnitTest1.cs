@@ -74,5 +74,25 @@ namespace LinqAddressBookTest
             }
 
         }
+
+        /// <summary>
+        /// test method to retreive based on either city or state
+        /// </summary>
+        [TestMethod]
+
+        public void TestForRetreiveBasedOnStateOrCity()
+        {
+            try
+            {
+                int actual, expected = 2;
+                actual = manager.RetreiveBasedOnStateOrCity("Tn","chennai", person);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
     }
 }
